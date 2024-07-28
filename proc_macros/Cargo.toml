@@ -1,0 +1,13 @@
+[package]
+name = "proc_macros"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+syn = "2.0.65"
+quote = "1.0"
+darling = "0.20.9"
+proc-macro2 = "1.0.83"
+
+[lib]
+proc-macro = true
