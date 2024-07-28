@@ -1,0 +1,75 @@
+[package]
+name = "libtypec-rs"
+authors = ["Rajaram Regupathy", "Daniel Almeida"]
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+argh = "0.1.12"
+bitstream-io = "2.2.0"
+enumn = "0.1.13"
+nix = { version = "0.28.0", features = ["poll", "feature"] }
+proc_macros = { path = "proc_macros" }
+regex = "1.10.4"
+thiserror = "1.0.58"
+udev = { version = "0.8.0", features = ["hwdb"] }
+walkdir = "2.5.0"
+bitflags = "2.5.0"
+paste = "1.0.15"
+
+[build-dependencies]
+cbindgen = "0.26.0"
+cc = "1.0.92"
+cargo-deb = "2.1.0"
+
+
+[workspace]
+members = ["proc_macros", "c_examples"]
+
+[features]
+c_api = []
+backtrace = []
+
+[lib]
+name = "libtypec_rs"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[package.metadata.deb]
+maintainer = "Rajaram Regupathy <rajaram.regupathy@gmail.com>"
+license-file = ["LICENSE-MIT", "LICENSE-APACHE"]
+# Dependencies are handled by Cargo
+depends = ""
+extended-description = "USB Type-C Connector System software Interface (UCSI) tools"
+section = "libs"
+priority = "optional"
+assets = [
+    [
+        "target/release/liblibtypec_rs.so",
+        "usr/lib/",
+        "644",
+    ],
+    [
+        "target/release/libtypec_rs.pc",
+        "usr/lib/pkgconfig/",
+        "644",
+    ],
+    [
+        "target/include/libtypec-rs.h",
+        "usr/include/",
+        "644",
+    ],
+    [
+        "target/release/lstypec",
+        "usr/bin/",
+        "644",
+    ],
+    [
+        "target/release/typecstatus",
+        "usr/bin/",
+        "644",
+    ],
+]
+features = ["c_api"]

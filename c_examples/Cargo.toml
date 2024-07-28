@@ -1,0 +1,16 @@
+[package]
+name = "c_examples"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+libtypec-rs = {path = "..", features=["c_api"]}
+argh = "0.1.12"
+
+[[example]]
+name = "lstypec"
+path = "lstypec.rs"
+
+[build-dependencies]
+cbindgen = "0.26.0"
+cc = "1.0.92"
