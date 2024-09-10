@@ -7,7 +7,6 @@
 use argh::FromArgs;
 use libtypec_rs::typec::OsBackends;
 
-#[link(name = "c_examples_lstypec")]
 extern "C" {
     fn c_example_lstypec(backend: u32) -> std::ffi::c_int;
 }
